@@ -8,4 +8,12 @@ export class TodoService {
   findAll(): Todo[] {
     return this.storage;
   }
+
+  create(todo: Todo): void {
+    const currentMaxId = Math.max(...this.storage
+      .map((t: Todo) => t.id)
+      .filter((id): id is number => typeof id === 'number'));
+    todo.id = currentMaxId + 1;
+    this.storage.push(todo);
+  }
 }

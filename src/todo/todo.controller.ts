@@ -1,4 +1,4 @@
-import { Controller, Get, Inject } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { Todo } from './todo.interface';
 import { TodoService } from './todo.service';
 
@@ -10,5 +10,10 @@ export class TodoController {
   @Get()
   findAll(): Todo[] {
     return this.todoService.findAll();
+  }
+
+  @Post()
+  create(@Body() todo: Todo) : void {
+    return this.todoService.create(todo);
   }
 }
