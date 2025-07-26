@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Logger, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { Todo } from './todo.interface';
 import { TodoService } from './todo.service';
 
@@ -11,7 +11,7 @@ export class TodoController {
 
   @Get()
   findAll(): Todo[] {
-    this.logger.log("handling finda all request...")
+    this.logger.log("handling find all request...")
     return this.todoService.findAll();
   }
 
@@ -19,5 +19,11 @@ export class TodoController {
   create(@Body() todo: Todo) : void {
     this.logger.log("handling create request...")
     return this.todoService.create(todo);
+  }
+
+  @Get(':id')
+  get(@Param('id', ParseIntPipe) id : number) : Todo | undefined {
+    this.logger.log("handling find one request...")
+    return this.todoService.findOne(id);
   }
 }

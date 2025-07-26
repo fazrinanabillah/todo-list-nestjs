@@ -16,4 +16,8 @@ export class TodoService {
     todo.id = currentMaxId + 1;
     this.storage.push(todo);
   }
+
+  findOne(id: number): Todo | undefined {
+    return this.storage.find((t: Todo) => t.id === id)
+  }
 }
