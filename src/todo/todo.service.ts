@@ -10,7 +10,7 @@ export class TodoService {
   }
 
   create(todo: Todo): void {
-    const currentMaxId = Math.max(...this.storage
+    const currentMaxId = Math.max(0,...this.storage
       .map((t: Todo) => t.id)
       .filter((id): id is number => typeof id === 'number'));
     todo.id = currentMaxId + 1;
